@@ -1,0 +1,13 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#my-canvas {
+  display: none;
+}
+
+#gameover-screen {
+  display: none;
+}
