@@ -14,7 +14,7 @@ class Game {
   }
 
   //MÉTODOS
-  gameover = () => {
+  gameOver = () => {
     this.isGameOn = false;
 
     //ocultar canvas
@@ -33,9 +33,17 @@ class Game {
         eachAsteroid.y < this.spaceShip.y + this.spaceShip.h &&
         eachAsteroid.h + eachAsteroid.y > this.spaceShip.y
       ) {
-        this.gameover();
+        this.gameOver();
       }
     });
+  };
+
+  checkCanvasCollision = () => {
+    if (this.spaceShip.y + this.spaceShip.h > canvas.height) {
+      this.gameOver();
+    } else if (this.spaceShip.y + this.spaceShip.h < 0) {
+      this.gameOver();
+    }
   };
 
   flyingAsteroids = () => {
@@ -78,6 +86,7 @@ class Game {
       eachAsteroid.movingAsteroid();
     });
     this.removeAsteroids();
+    this.checkCanvasCollision();
     this.checkCollision();
 
     //3. Dibujado
