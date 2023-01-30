@@ -4,9 +4,27 @@ body {
   justify-content: center;
 }
 
+#splash-screen {
+  display: flex;
+  flex-direction: column;
+}
+
 #splash-screen img {
   width: 700px;
   height: 500px;
+}
+
+
+#play-btn {
+  background: #FFE81F;
+	color: black;
+	border: none;
+	outline: solid 1px black;
+  border-radius: 4px;
+	padding: 100;
+	cursor: pointer;
+  font-size: 2em;
+  font-weight: bold;
 }
 
 #my-canvas {

@@ -39,9 +39,10 @@ class Game {
   };
 
   checkCanvasCollision = () => {
-    if (this.spaceShip.y + this.spaceShip.h > canvas.height) {
-      this.gameOver();
-    } else if (this.spaceShip.y + this.spaceShip.h < 0) {
+    if (
+      this.spaceShip.y + this.spaceShip.h > canvas.height ||
+      this.spaceShip.y < 0
+    ) {
       this.gameOver();
     }
   };

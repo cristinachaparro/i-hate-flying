@@ -4,6 +4,7 @@ const canvas = document.querySelector("#my-canvas");
 const splashScreenDOM = document.querySelector("#splash-screen");
 const ctx = canvas.getContext("2d");
 const gameoverScreenDOM = document.querySelector("#gameover-screen");
+const tryAgainBtnDOM = document.querySelector("#restart-btn");
 let game;
 
 // STATE MANAGEMENT FUNCTIONS
@@ -32,4 +33,10 @@ window.addEventListener("keydown", (event) => {
   } else if (event.code === "ArrowLeft") {
     game.spaceShip.spaceShipLeft();
   }
+
+  tryAgainBtnDOM.addEventListener("click", () => {
+    if (game.isGameOn === false) {
+      game.isGameOn = true;
+    }
+  });
 });
