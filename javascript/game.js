@@ -6,6 +6,7 @@ class Game {
     this.spaceShip = new SpaceShip();
     this.asteroidArr = [];
     this.frames = 1;
+    this.isGameOn = true;
 
     //this.laserBeam;
 
@@ -15,6 +16,23 @@ class Game {
   }
 
   //MÉTODOS
+  gameover = () => {
+    this.isGameOn = false;
+  };
+
+  checkCollision = () => {
+    this.asteroidArr.forEach((eachAsteroid) => {
+      if (
+        eachAsteroid.x < this.spaceShip.x + this.spaceShip.w &&
+        eachAsteroid.x + eachAsteroid.w > this.spaceShip.x &&
+        eachAsteroid.y < this.spaceShip.y + this.spaceShip.h &&
+        eachAsteroid.h + eachAsteroid.y > this.spaceShip.y
+      ) {
+        this.gameover();
+      }
+    });
+  };
+
   flyingAsteroids = () => {
     //loop con condiciones randomizadas para spawnear asteroides
     if (this.asteroidArr.length === 0 || this.frames % 60 === 0) {
@@ -55,6 +73,7 @@ class Game {
       eachAsteroid.movingAsteroid();
     });
     this.removeAsteroids();
+    this.checkCollision();
 
     //3. Dibujado
     this.drawBg();
@@ -64,6 +83,8 @@ class Game {
     });
 
     //4. Recursión
-    requestAnimationFrame(this.gameLoop);
+    if (this.isGameOn === true) {
+      requestAnimationFrame(this.gameLoop);
+    }
   };
 }
