@@ -1,13 +1,17 @@
 class Asteroid {
-  constructor() {
-    this.x = 70;
-    this.y = 70;
+  constructor(yPos, speed, isAsteroidBrown) {
+    this.x = canvas.width;
+    this.y = yPos;
     this.h = 60;
     this.w = 60;
 
-    this.speed = 4;
+    this.speed = speed;
     this.image = new Image();
-    this.image.src = "./images/asteroid1.png";
+    if (isAsteroidBrown === true) {
+      this.image.src = "./images/asteroid1.png";
+    } else {
+      this.image.src = "./images/asteroid2.png";
+    }
   }
   //MÉTODOS
   drawAsteroid = () => {
@@ -15,9 +19,8 @@ class Asteroid {
   };
 
   //propiedades de los asteroides
-  //que los asteroides avancen
   movingAsteroid = () => {
-    this.x += this.speed;
+    this.x -= this.speed;
   };
 
   //que los asteroides desaparezcan

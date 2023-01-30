@@ -4,6 +4,11 @@ body {
   justify-content: center;
 }
 
+#splash-screen img {
+  width: 700px;
+  height: 500px;
+}
+
 #my-canvas {
   display: none;
 }

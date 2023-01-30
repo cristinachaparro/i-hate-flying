@@ -6,7 +6,6 @@ class Game {
     this.spaceShip = new SpaceShip();
     this.asteroidArr = [];
     this.frames = 1;
-    this.asteroidSeparation = 250;
 
     //this.laserBeam;
 
@@ -17,11 +16,18 @@ class Game {
 
   //MÉTODOS
   flyingAsteroids = () => {
-    if (this.asteroidArr.length === 0 || this.frames % 120 === 0) {
-      let randomPosY = Math.random() * -100;
-
-      let asteroid = new Asteroid(randomPosY, true);
-      this.asteroidArr.push(asteroid);
+    if (this.asteroidArr.length === 0 || this.frames % 60 === 0) {
+      for (let i = 0; i < 8; i++) {
+        setTimeout(() => {
+          let randomPosY = Math.random() * 500;
+          let asteroid = new Asteroid(
+            randomPosY,
+            Math.random() * 3 + 2, // speed
+            Math.round(Math.random()) === 0 // color
+          );
+          this.asteroidArr.push(asteroid);
+        }, i * 1000); // frequency
+      }
     }
   };
 
