@@ -16,3 +16,8 @@ body {
 #gameover-screen {
   display: none;
 }
+
+#gameover-screen img {
+  width: 700px;
+  height: 500px;
+}

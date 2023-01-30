@@ -3,6 +3,7 @@ const playBtnDOM = document.querySelector("#play-btn");
 const canvas = document.querySelector("#my-canvas");
 const splashScreenDOM = document.querySelector("#splash-screen");
 const ctx = canvas.getContext("2d");
+const gameoverScreenDOM = document.querySelector("#gameover-screen");
 let game;
 
 // STATE MANAGEMENT FUNCTIONS

@@ -11,16 +11,21 @@ class Game {
     //this.laserBeam;
 
     //colisiones nave-asteroides y láser-asteroides
-
-    //al colisionar: gameover
   }
 
   //MÉTODOS
   gameover = () => {
     this.isGameOn = false;
+
+    //ocultar canvas
+    canvas.style.display = "none";
+
+    //mostrar pantalla final
+    gameoverScreenDOM.style.display = "flex";
   };
 
   checkCollision = () => {
+    //revisa las colisiones entre los elementos
     this.asteroidArr.forEach((eachAsteroid) => {
       if (
         eachAsteroid.x < this.spaceShip.x + this.spaceShip.w &&
