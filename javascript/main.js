@@ -11,6 +11,7 @@ let game;
 const startGame = () => {
   //1. Quitar la splash-screen
   splashScreenDOM.style.display = "none";
+  gameoverScreenDOM.style.display = "none";
   canvas.style.display = "block";
   //2. Iniciar juego
   game = new Game();
@@ -21,6 +22,8 @@ const startGame = () => {
 
 //ADD EVENT LISTENERS
 playBtnDOM.addEventListener("click", startGame);
+tryAgainBtnDOM.addEventListener("click", startGame);
+
 window.addEventListener("keydown", (event) => {
   if (event.code === "ArrowUp") {
     game.spaceShip.spaceShipUp();
@@ -33,10 +36,4 @@ window.addEventListener("keydown", (event) => {
   } else if (event.code === "ArrowLeft") {
     game.spaceShip.spaceShipLeft();
   }
-
-  tryAgainBtnDOM.addEventListener("click", () => {
-    if (game.isGameOn === false) {
-      game.isGameOn = true;
-    }
-  });
 });
