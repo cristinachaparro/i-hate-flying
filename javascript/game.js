@@ -16,18 +16,25 @@ class Game {
 
   //MÉTODOS
   flyingAsteroids = () => {
+    //loop con condiciones randomizadas para spawnear asteroides
     if (this.asteroidArr.length === 0 || this.frames % 60 === 0) {
-      for (let i = 0; i < 8; i++) {
+      for (let i = 0; i <= 100; i++) {
         setTimeout(() => {
           let randomPosY = Math.random() * 500;
           let asteroid = new Asteroid(
             randomPosY,
-            Math.random() * 3 + 2, // speed
+            Math.random() * 5, // speed
             Math.round(Math.random()) === 0 // color
           );
           this.asteroidArr.push(asteroid);
-        }, i * 1000); // frequency
+        }, i * 1000); // frecuencia de spawneo
       }
+    }
+  };
+
+  removeAsteroids = () => {
+    if (this.asteroidArr[0] < 0) {
+      this.asteroidArr.shift();
     }
   };
 
@@ -41,11 +48,14 @@ class Game {
   gameLoop = () => {
     //1. Limpiar el canvas
     this.clearCanvas();
+
     //2. Acciones
     this.flyingAsteroids();
     this.asteroidArr.forEach((eachAsteroid) => {
       eachAsteroid.movingAsteroid();
     });
+    this.removeAsteroids();
+
     //3. Dibujado
     this.drawBg();
     this.spaceShip.drawSpaceShip();

@@ -9,9 +9,6 @@ class SpaceShip {
     this.jumpSpeed = 20;
     this.image = new Image();
     this.image.src = "./images/spaceship.png";
-    this.image.style = {
-      transform: "rotate(90deg)",
-    };
   }
 
   //MÉTODOS
@@ -25,5 +22,13 @@ class SpaceShip {
 
   spaceShipDown = () => {
     this.y += this.jumpSpeed;
+  };
+
+  spaceShipRight = () => {
+    this.x += this.jumpSpeed;
+  };
+
+  spaceShipLeft = () => {
+    this.x -= this.jumpSpeed;
   };
 }

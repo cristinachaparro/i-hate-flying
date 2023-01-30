@@ -22,6 +22,4 @@ class Asteroid {
   movingAsteroid = () => {
     this.x -= this.speed;
   };
-
-  //que los asteroides desaparezcan
 }

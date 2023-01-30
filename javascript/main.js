@@ -25,4 +25,10 @@ window.addEventListener("keydown", (event) => {
   } else if (event.code === "ArrowDown") {
     game.spaceShip.spaceShipDown();
   }
+
+  if (event.code === "ArrowRight") {
+    game.spaceShip.spaceShipRight();
+  } else if (event.code === "ArrowLeft") {
+    game.spaceShip.spaceShipLeft();
+  }
 });
