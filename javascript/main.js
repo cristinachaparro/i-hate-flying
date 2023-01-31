@@ -5,6 +5,7 @@ const splashScreenDOM = document.querySelector("#splash-screen");
 const ctx = canvas.getContext("2d");
 const gameoverScreenDOM = document.querySelector("#gameover-screen");
 const tryAgainBtnDOM = document.querySelector("#restart-btn");
+const scoreDOM = document.querySelector("h1");
 let game;
 
 // STATE MANAGEMENT FUNCTIONS
@@ -13,6 +14,7 @@ const startGame = () => {
   splashScreenDOM.style.display = "none";
   gameoverScreenDOM.style.display = "none";
   canvas.style.display = "block";
+  scoreDOM.style.display = "block";
   //2. Iniciar juego
   game = new Game();
 
