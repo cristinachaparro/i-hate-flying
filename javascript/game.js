@@ -11,6 +11,14 @@ class Game {
     this.scoreDOM = document.querySelector("h1 span");
     this.scoreDOM.innerHTML = 0;
 
+    this.music = document.createElement("audio");
+    this.music.src = "./sounds/Soundtrack cut.mp3";
+    this.music.loop = true;
+    this.music.play();
+
+    this.sentence = document.createElement("audio");
+    this.sentence.src = "./sounds/This is why I hate Flying (cut).mp3";
+
     //this.laserBeam;
 
     //colisiones nave-asteroides y láser-asteroides
@@ -19,6 +27,8 @@ class Game {
   //MÉTODOS
   gameOver = () => {
     this.isGameOn = false;
+    this.sentence.play();
+    this.music.pause();
 
     //ocultar canvas
     canvas.style.display = "none";
