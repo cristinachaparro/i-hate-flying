@@ -63,14 +63,14 @@ class Game {
     }
   };
 
-  removeAsteroids = () => {
-    const firstAsteroid = this.asteroidArr[0];
-    if (firstAsteroid.x < 0) {
-      console.log(this.score, firstAsteroid.x + 60);
-      this.asteroidArr.shift();
-      this.score++;
-      this.scoreDOM.innerHTML = this.score;
-    }
+  removeAsteroids = (index) => {
+    this.asteroidArr.forEach((eachAsteroid, index) => {
+      if (eachAsteroid.x + eachAsteroid.w < 0) {
+        this.score++;
+        this.asteroidArr.shift();
+        this.scoreDOM.innerHTML = this.score;
+      }
+    });
   };
 
   drawBg = () => {
