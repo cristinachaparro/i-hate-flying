@@ -27,10 +27,6 @@ class Game {
 
   //MÉTODOS
 
-  spawnLaser = () => {
-    this.laser = (this.spaceShip.x, this.spaceShip.y);
-  };
-
   gameOver = () => {
     this.isGameOn = false;
     this.sentence.play();
@@ -64,6 +60,13 @@ class Game {
     ) {
       this.gameOver();
     }
+  };
+
+  shoot = () => {
+    let x = this.spaceShip.x;
+    let y = this.spaceShip.y + this.spaceShip.h / 2;
+    let laser = new Laser(x, y);
+    this.laserArr.push(laser);
   };
 
   flyingAsteroids = () => {
@@ -106,6 +109,9 @@ class Game {
     this.asteroidArr.forEach((eachAsteroid) => {
       eachAsteroid.movingAsteroid();
     });
+    this.laserArr.forEach((eachLaser) => {
+      eachLaser.movingLaser();
+    });
     this.checkCanvasCollision();
     this.checkCollision();
     this.removeAsteroids();
@@ -116,7 +122,9 @@ class Game {
     this.asteroidArr.forEach((eachAsteroid) => {
       eachAsteroid.drawAsteroid();
     });
-    this.laser.drawLaser();
+    this.laserArr.forEach((eachLaser) => {
+      eachLaser.drawLaser();
+    });
 
     //4. Recursión
     if (this.isGameOn === true) {

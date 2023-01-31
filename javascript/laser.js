@@ -15,7 +15,7 @@ class Laser {
   };
 
   //propiedades del láser
-  shoot = () => {
+  movingLaser = () => {
     this.x += this.speed;
   };
 }

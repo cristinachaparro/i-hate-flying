@@ -40,6 +40,6 @@ window.addEventListener("keydown", (event) => {
   }
 
   if (event.code === "Space") {
-    game.laser.shoot();
+    game.shoot();
   }
 });
