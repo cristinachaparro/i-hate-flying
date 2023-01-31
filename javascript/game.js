@@ -40,7 +40,7 @@ class Game {
   };
 
   checkCollision = () => {
-    //revisa las colisiones entre los elementos
+    //colisiones entre asteroides y la nave
     this.asteroidArr.forEach((eachAsteroid) => {
       if (
         eachAsteroid.x < this.spaceShip.x + this.spaceShip.w &&
@@ -60,6 +60,19 @@ class Game {
     ) {
       this.gameOver();
     }
+  };
+
+  checkLaserCollision = () => {
+    this.laserArr.forEach((eachAsteroid, index) => {
+      if (
+        eachAsteroid.x < this.laser.x + this.laser.w &&
+        eachAsteroid.x + eachAsteroid.w > this.laser.x &&
+        eachAsteroid.y < this.laser.y + this.laser.h &&
+        eachAsteroid.h + eachAsteroid.y > this.laser.y
+      ) {
+        this.asteroidArr.splice(index, 1);
+      }
+    });
   };
 
   shoot = () => {
@@ -114,6 +127,7 @@ class Game {
     });
     this.checkCanvasCollision();
     this.checkCollision();
+    this.checkLaserCollision();
     this.removeAsteroids();
 
     //3. Dibujado
