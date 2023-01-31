@@ -66,8 +66,8 @@ class Game {
   removeAsteroids = (index) => {
     this.asteroidArr.forEach((eachAsteroid, index) => {
       if (eachAsteroid.x + eachAsteroid.w < 0) {
+        this.asteroidArr.splice(index, 1);
         this.score++;
-        this.asteroidArr.shift();
         this.scoreDOM.innerHTML = this.score;
       }
     });
