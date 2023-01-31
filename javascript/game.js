@@ -7,6 +7,9 @@ class Game {
     this.asteroidArr = [];
     this.frames = 1;
     this.isGameOn = true;
+    this.score = 0;
+    this.scoreDOM = document.querySelector("h1 span");
+    this.scoreDOM.innerHTML = 0;
 
     //this.laserBeam;
 
@@ -50,23 +53,23 @@ class Game {
   flyingAsteroids = () => {
     //loop con condiciones randomizadas para spawnear asteroides
     if (this.asteroidArr.length === 0 || this.frames % 60 === 0) {
-      for (let i = 0; i <= 100; i++) {
-        setTimeout(() => {
-          let randomPosY = Math.random() * 500;
-          let asteroid = new Asteroid(
-            randomPosY,
-            Math.random() * 5, // speed
-            Math.round(Math.random()) === 0 // color
-          );
-          this.asteroidArr.push(asteroid);
-        }, i * 1000); // frecuencia de spawneo
-      }
+      let randomPosY = Math.random() * 500;
+      let asteroid = new Asteroid(
+        randomPosY,
+        Math.random() * 5, // speed
+        Math.round(Math.random()) === 0 // color
+      );
+      this.asteroidArr.push(asteroid);
     }
   };
 
   removeAsteroids = () => {
-    if (this.asteroidArr[0] < 0) {
+    const firstAsteroid = this.asteroidArr[0];
+    if (firstAsteroid.x < 0) {
+      console.log(this.score, firstAsteroid.x + 60);
       this.asteroidArr.shift();
+      this.score++;
+      this.scoreDOM.innerHTML = this.score;
     }
   };
 
@@ -78,6 +81,7 @@ class Game {
   };
 
   gameLoop = () => {
+    this.frames++;
     //1. Limpiar el canvas
     this.clearCanvas();
 
@@ -86,9 +90,9 @@ class Game {
     this.asteroidArr.forEach((eachAsteroid) => {
       eachAsteroid.movingAsteroid();
     });
-    this.removeAsteroids();
     this.checkCanvasCollision();
     this.checkCollision();
+    this.removeAsteroids();
 
     //3. Dibujado
     this.drawBg();

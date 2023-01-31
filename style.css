@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
+/* font-family: 'Orbitron', sans-serif; */
+
 body {
   display: flex;
   align-items: center;
@@ -16,6 +19,7 @@ body {
 
 
 #play-btn {
+  font-family: 'Orbitron', sans-serif;
   background: #FFE81F;
 	color: black;
 	border: none;
@@ -25,10 +29,23 @@ body {
 	cursor: pointer;
   font-size: 2em;
   font-weight: bold;
+  position: relative;
+  top: -200px;
+  margin: 0 auto;
 }
 
 #my-canvas {
   display: none;
+}
+
+#canvas-screen {
+  display: flex;
+  flex-direction: column;
+}
+
+#canvas-screen h1 {
+  font-family: 'Orbitron', sans-serif;
+  margin: 0 auto;
 }
 
 #gameover-screen {
@@ -38,4 +55,20 @@ body {
 #gameover-screen img {
   width: 700px;
   height: 500px;
+}
+
+#restart-btn {
+  font-family: 'Orbitron', sans-serif;
+  background: #FFE81F;
+	color: black;
+	border: none;
+	outline: solid 1px black;
+  border-radius: 4px;
+	padding: 100;
+	cursor: pointer;
+  font-size: 2em;
+  font-weight: bold;
+  position: absolute;
+  top: 350px;
+  left: calc(50% - 95px);
 }
