@@ -5,8 +5,11 @@ class Game {
     this.bg.src = "./images/bg-space.png";
     this.spaceShip = new SpaceShip();
     this.asteroidArr = [];
+    this.laserArr = [];
+
     this.frames = 1;
     this.isGameOn = true;
+
     this.score = 0;
     this.scoreDOM = document.querySelector("h1 span");
     this.scoreDOM.innerHTML = 0;
@@ -19,12 +22,15 @@ class Game {
     this.sentence = document.createElement("audio");
     this.sentence.src = "./sounds/This is why I hate Flying (cut).mp3";
 
-    //this.laserBeam;
-
     //colisiones nave-asteroides y láser-asteroides
   }
 
   //MÉTODOS
+
+  spawnLaser = () => {
+    this.laser = (this.spaceShip.x, this.spaceShip.y);
+  };
+
   gameOver = () => {
     this.isGameOn = false;
     this.sentence.play();
@@ -110,6 +116,7 @@ class Game {
     this.asteroidArr.forEach((eachAsteroid) => {
       eachAsteroid.drawAsteroid();
     });
+    this.laser.drawLaser();
 
     //4. Recursión
     if (this.isGameOn === true) {

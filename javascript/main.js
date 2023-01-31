@@ -38,4 +38,8 @@ window.addEventListener("keydown", (event) => {
   } else if (event.code === "ArrowLeft") {
     game.spaceShip.spaceShipLeft();
   }
+
+  if (event.code === "Space") {
+    game.laser.shoot();
+  }
 });
