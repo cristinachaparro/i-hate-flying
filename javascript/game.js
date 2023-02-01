@@ -116,8 +116,6 @@ class Game {
     this.asteroidArr.forEach((eachAsteroid, index) => {
       if (eachAsteroid.x + eachAsteroid.w < 0) {
         this.asteroidArr.splice(index, 1);
-        this.score++;
-        this.scoreDOM.innerHTML = this.score;
       }
     });
   };
