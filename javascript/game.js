@@ -53,22 +53,23 @@ class Game {
 
   checkLives = () => {
     this.lives--;
+    const liveShip = document.querySelector("#lives-counter img");
+    liveShip.remove();
     if (this.lives === 0) {
       this.gameOver();
-    } else {
-      // quitar una imagen
     }
   };
 
   checkCollision = () => {
     //colisiones entre asteroides y la nave
-    this.asteroidArr.forEach((eachAsteroid) => {
+    this.asteroidArr.forEach((eachAsteroid, index) => {
       if (
         eachAsteroid.x < this.spaceShip.x + this.spaceShip.w &&
         eachAsteroid.x + eachAsteroid.w > this.spaceShip.x &&
         eachAsteroid.y < this.spaceShip.y + this.spaceShip.h &&
         eachAsteroid.h + eachAsteroid.y > this.spaceShip.y
       ) {
+        this.asteroidArr.splice(index, 1);
         this.checkLives();
       }
     });
