@@ -16,6 +16,7 @@ class Game {
 
     this.lives = 3;
     this.livesDOM = document.querySelector("#canvas-screen #lives-counter");
+    this.livesDOM.innerHTML = "";
     for (let i = 0; i < this.lives; i++) {
       const liveShip = new Image();
       liveShip.src = "./images/spaceLives.png";
@@ -38,6 +39,15 @@ class Game {
   }
 
   //MÉTODOS
+
+  win = () => {
+    if (this.score === 5) {
+      this.isGameOn = false;
+      this.music.pause();
+      canvas.style.display = "none";
+      winnerScreenDOM.style.display = "flex";
+    }
+  };
 
   gameOver = () => {
     this.isGameOn = false;
@@ -162,6 +172,7 @@ class Game {
     this.checkCollision();
     this.checkLaserCollision();
     this.removeAsteroids();
+    this.win();
 
     //3. Dibujado
     this.drawBg();

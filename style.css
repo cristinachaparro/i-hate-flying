@@ -86,7 +86,35 @@ body {
 	border: none;
 	outline: solid 1px black;
   border-radius: 4px;
-	padding: 100;
+	cursor: pointer;
+  font-size: 2em;
+  font-weight: bold;
+  position: absolute;
+  top: calc(50% + 50px);
+  left: calc(50% - 95px);
+}
+
+#winner-screen {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  align-items: center;
+  justify-content: center;
+}
+
+#winner-screen img {
+  width: 700px;
+  height: 500px;
+}
+
+#playagain-btn {
+  font-family: 'Orbitron', sans-serif;
+  background: #FFE81F;
+	color: black;
+	border: none;
+	outline: solid 1px black;
+  border-radius: 4px;
 	cursor: pointer;
   font-size: 2em;
   font-weight: bold;
