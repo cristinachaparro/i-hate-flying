@@ -14,6 +14,8 @@ const startGame = () => {
   splashScreenDOM.style.display = "none";
   gameoverScreenDOM.style.display = "none";
   canvas.style.display = "block";
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
   scoreDOM.style.display = "block";
   //2. Iniciar juego
   game = new Game();

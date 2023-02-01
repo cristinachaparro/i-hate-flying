@@ -11,8 +11,16 @@ class Game {
     this.isGameOn = true;
 
     this.score = 0;
-    this.scoreDOM = document.querySelector("h1 span");
+    this.scoreDOM = document.querySelector("#canvas-screen h1 span");
     this.scoreDOM.innerHTML = 0;
+
+    this.lives = 3;
+    this.livesDOM = document.querySelector("#canvas-screen #lives-counter");
+    for (let i = 0; i < this.lives; i++) {
+      const liveShip = new Image();
+      liveShip.src = "./images/spaceLives.png";
+      this.livesDOM.appendChild(liveShip);
+    }
 
     this.music = document.createElement("audio");
     this.music.src = "./sounds/Soundtrack cut.mp3";
@@ -43,6 +51,15 @@ class Game {
     gameoverScreenDOM.style.display = "flex";
   };
 
+  checkLives = () => {
+    this.lives--;
+    if (this.lives === 0) {
+      this.gameOver();
+    } else {
+      // quitar una imagen
+    }
+  };
+
   checkCollision = () => {
     //colisiones entre asteroides y la nave
     this.asteroidArr.forEach((eachAsteroid) => {
@@ -52,7 +69,7 @@ class Game {
         eachAsteroid.y < this.spaceShip.y + this.spaceShip.h &&
         eachAsteroid.h + eachAsteroid.y > this.spaceShip.y
       ) {
-        this.gameOver();
+        this.checkLives();
       }
     });
   };
@@ -62,7 +79,7 @@ class Game {
       this.spaceShip.y + this.spaceShip.h > canvas.height ||
       this.spaceShip.y < 0
     ) {
-      this.gameOver();
+      this.checkLives();
     }
   };
 

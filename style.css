@@ -10,8 +10,12 @@ body {
 
 #splash-screen {
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  padding-top: 40px;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
 }
 
 #splash-screen img {
@@ -42,17 +46,32 @@ body {
 
 #canvas-screen {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  width: calc(100vw - 40px);
+  padding: 20px;
 }
 
 #canvas-screen h1 {
   font-family: 'Orbitron', sans-serif;
+  color: white;
   margin: 0 auto;
   display: none;
 }
 
+#lives-counter img {
+  width: 30px;
+  height: 30px;
+  margin-right: 8px;
+}
+
 #gameover-screen {
   display: none;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  align-items: center;
+  justify-content: center;
 }
 
 #gameover-screen img {
@@ -72,6 +91,6 @@ body {
   font-size: 2em;
   font-weight: bold;
   position: absolute;
-  top: 350px;
+  top: calc(50% + 50px);
   left: calc(50% - 95px);
 }
