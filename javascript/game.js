@@ -16,13 +16,13 @@ class Game {
 
     this.music = document.createElement("audio");
     this.music.src = "./sounds/Soundtrack cut.mp3";
+    this.music.volume = 0.05;
     this.music.loop = true;
     this.music.play();
 
     this.sentence = document.createElement("audio");
     this.sentence.src = "./sounds/This is why I hate Flying (cut).mp3";
-
-    //colisiones nave-asteroides y láser-asteroides
+    this.sentence.volume = 0.05;
   }
 
   //MÉTODOS
@@ -63,12 +63,13 @@ class Game {
   };
 
   checkLaserCollision = () => {
-    this.laserArr.forEach((eachAsteroid, index) => {
+    //colisiones entre asteroides y el láser
+    this.laserArr.forEach((eachLaser, index) => {
       if (
-        eachAsteroid.x < this.laser.x + this.laser.w &&
-        eachAsteroid.x + eachAsteroid.w > this.laser.x &&
-        eachAsteroid.y < this.laser.y + this.laser.h &&
-        eachAsteroid.h + eachAsteroid.y > this.laser.y
+        eachLaser.x > this.asteroid.x - this.asteroid.w &&
+        eachLaser.x - eachLaser.w < this.asteroid.x &&
+        eachLaser.y > this.asteroid.y - this.asteroid.h &&
+        eachLaser.h - eachLaser.y < this.asteroid.y
       ) {
         this.asteroidArr.splice(index, 1);
       }
