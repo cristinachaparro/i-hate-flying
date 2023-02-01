@@ -22,7 +22,7 @@ class Game {
 
     this.sentence = document.createElement("audio");
     this.sentence.src = "./sounds/This is why I hate Flying (cut).mp3";
-    this.sentence.volume = 0.05;
+    this.sentence.volume = 0.1;
   }
 
   //MÉTODOS
@@ -64,15 +64,19 @@ class Game {
 
   checkLaserCollision = () => {
     //colisiones entre asteroides y el láser
-    this.laserArr.forEach((eachLaser, index) => {
-      if (
-        eachLaser.x > this.asteroid.x - this.asteroid.w &&
-        eachLaser.x - eachLaser.w < this.asteroid.x &&
-        eachLaser.y > this.asteroid.y - this.asteroid.h &&
-        eachLaser.h - eachLaser.y < this.asteroid.y
-      ) {
-        this.asteroidArr.splice(index, 1);
-      }
+    this.laserArr.forEach((eachLaser, i) => {
+      this.asteroidArr.forEach((eachAsteroid, j) => {
+        if (
+          eachLaser.x + eachLaser.w > eachAsteroid.x &&
+          eachLaser.y > eachAsteroid.y &&
+          eachLaser.y < eachAsteroid.y + eachAsteroid.h
+        ) {
+          this.laserArr.splice(i, 1);
+          this.asteroidArr.splice(j, 1);
+          this.score++;
+          this.scoreDOM.innerHTML = this.score;
+        }
+      });
     });
   };
 
