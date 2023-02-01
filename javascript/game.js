@@ -16,9 +16,13 @@ class Game {
 
     this.music = document.createElement("audio");
     this.music.src = "./sounds/Soundtrack cut.mp3";
-    this.music.volume = 0.05;
+    this.music.volume = 0.1;
     this.music.loop = true;
     this.music.play();
+
+    this.blaster = document.createElement("audio");
+    this.blaster.src = "./sounds/blaster.mp3";
+    this.blaster.volume = 0.02;
 
     this.sentence = document.createElement("audio");
     this.sentence.src = "./sounds/This is why I hate Flying (cut).mp3";
@@ -81,10 +85,12 @@ class Game {
   };
 
   shoot = () => {
+    this.blaster.currentTime = 0;
     let x = this.spaceShip.x;
     let y = this.spaceShip.y + this.spaceShip.h / 2;
     let laser = new Laser(x, y);
     this.laserArr.push(laser);
+    this.blaster.play();
   };
 
   flyingAsteroids = () => {
