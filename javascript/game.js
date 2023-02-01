@@ -96,10 +96,16 @@ class Game {
   flyingAsteroids = () => {
     //loop con condiciones randomizadas para spawnear asteroides
     if (this.asteroidArr.length === 0 || this.frames % 60 === 0) {
+      let speed = Math.random() * 5 + 2;
+      if (this.score >= 30) {
+        speed += 2;
+      } else if (this.score >= 60) {
+        speed += 4;
+      }
       let randomPosY = Math.random() * 500;
       let asteroid = new Asteroid(
         randomPosY,
-        Math.random() * 5, // speed
+        speed, // speed
         Math.round(Math.random()) === 0 // color
       );
       this.asteroidArr.push(asteroid);
