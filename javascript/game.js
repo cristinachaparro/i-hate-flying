@@ -12,11 +12,11 @@ class Game {
     this.isGameOn = true;
 
     this.score = 0;
-    this.scoreDOM = document.querySelector("#canvas-screen h1 span");
+    this.scoreDOM = document.querySelector("#game-stats h1 span");
     this.scoreDOM.innerHTML = 0;
 
     this.lives = 3;
-    this.livesDOM = document.querySelector("#canvas-screen #lives-counter");
+    this.livesDOM = document.querySelector("#game-stats #lives-counter");
     this.livesDOM.innerHTML = "";
     for (let i = 0; i < this.lives; i++) {
       this.addLifeShipImage();
@@ -39,10 +39,129 @@ class Game {
 
   //MÉTODOS
 
+  flyingAsteroids = () => {
+    //Loop con condiciones randomizadas para spawnear asteroides
+    if (this.asteroidArr.length === 0 || this.frames % 60 === 0) {
+      let speed = Math.random() * 5 + 2;
+      if (this.score >= 30) {
+        speed += 2;
+      } else if (this.score >= 60) {
+        speed += 4;
+      }
+      let randomPosY = Math.random() * 500;
+      let asteroid = new Asteroid(
+        randomPosY,
+        speed, // speed
+        Math.round(Math.random()) === 0 // color
+      );
+      this.asteroidArr.push(asteroid);
+    }
+  };
+
+  checkCollision = () => {
+    //colisiones entre asteroides y la nave
+    this.asteroidArr.forEach((eachAsteroid, index) => {
+      if (
+        eachAsteroid.x < this.spaceShip.x + this.spaceShip.w &&
+        eachAsteroid.x + eachAsteroid.w > this.spaceShip.x &&
+        eachAsteroid.y < this.spaceShip.y + this.spaceShip.h &&
+        eachAsteroid.h + eachAsteroid.y > this.spaceShip.y
+      ) {
+        this.asteroidArr.splice(index, 1);
+        this.checkLives();
+      }
+    });
+  };
+
+  removeAsteroids = () => {
+    this.asteroidArr.forEach((eachAsteroid, index) => {
+      if (eachAsteroid.x + eachAsteroid.w < 0) {
+        this.asteroidArr.splice(index, 1);
+      }
+    });
+  };
+
+  shoot = () => {
+    this.blaster.currentTime = 0;
+    let x = this.spaceShip.x;
+    let y = this.spaceShip.y + this.spaceShip.h / 2;
+    let laser = new Laser(x, y);
+    this.laserArr.push(laser);
+    this.blaster.play();
+  };
+
+  checkLaserCollision = () => {
+    //colisiones entre asteroides y el láser
+    this.laserArr.forEach((eachLaser, i) => {
+      this.asteroidArr.forEach((eachAsteroid, j) => {
+        if (
+          eachLaser.x + eachLaser.w > eachAsteroid.x &&
+          eachLaser.y > eachAsteroid.y &&
+          eachLaser.y < eachAsteroid.y + eachAsteroid.h
+        ) {
+          this.laserArr.splice(i, 1);
+          this.asteroidArr.splice(j, 1);
+          this.score++;
+          this.scoreDOM.innerHTML = this.score;
+        }
+      });
+    });
+  };
+
+  flyingExtraLives = () => {
+    if (this.extraLivesArr.length === 0 || this.frames % 800 === 0) {
+      let randomPosY = Math.random() * canvas.height;
+      let extraLife = new ExtraLife(randomPosY);
+      this.extraLivesArr.push(extraLife);
+    }
+  };
+
+  checkExtraLivesCollision = () => {
+    //colisiones entre la vida extra y la nave
+    this.extraLivesArr.forEach((eachLife, index) => {
+      if (
+        eachLife.x < this.spaceShip.x + this.spaceShip.w &&
+        eachLife.x + eachLife.w > this.spaceShip.x &&
+        eachLife.y < this.spaceShip.y + this.spaceShip.h &&
+        eachLife.h + eachLife.y > this.spaceShip.y
+      ) {
+        this.lives++;
+        this.addLifeShipImage();
+        this.extraLivesArr.splice(index, 1);
+      }
+    });
+  };
+
   addLifeShipImage = () => {
     const liveShip = new Image();
     liveShip.src = "./images/spaceLives.png";
     this.livesDOM.appendChild(liveShip);
+  };
+
+  checkCanvasCollision = () => {
+    if (
+      this.spaceShip.y + this.spaceShip.h > canvas.height ||
+      this.spaceShip.y < 0
+    ) {
+      this.checkLives();
+    }
+  };
+
+  checkLives = () => {
+    this.lives--;
+    const liveShip = document.querySelector("#lives-counter img");
+    liveShip.remove();
+    if (this.lives === 0) {
+      this.gameOver();
+    }
+  };
+
+  removeExtraLife = () => {
+    this.extraLivesArr.forEach((eachLife, index) => {
+      if (eachLife.x + eachLife.w < 0) {
+        this.extraLivesArr.splice(index, 1);
+      }
+    });
   };
 
   win = () => {
@@ -64,125 +183,6 @@ class Game {
 
     //mostrar pantalla final
     gameoverScreenDOM.style.display = "flex";
-  };
-
-  checkLives = () => {
-    this.lives--;
-    const liveShip = document.querySelector("#lives-counter img");
-    liveShip.remove();
-    if (this.lives === 0) {
-      this.gameOver();
-    }
-  };
-
-  checkExtraLivesCollision = () => {
-    //colisiones entre la vida extra y la nave
-    this.extraLivesArr.forEach((eachLife, index) => {
-      if (
-        eachLife.x < this.spaceShip.x + this.spaceShip.w &&
-        eachLife.x + eachLife.w > this.spaceShip.x &&
-        eachLife.y < this.spaceShip.y + this.spaceShip.h &&
-        eachLife.h + eachLife.y > this.spaceShip.y
-      ) {
-        this.lives++;
-        this.addLifeShipImage();
-        this.extraLivesArr.splice(index, 1);
-      }
-    });
-  };
-
-  checkCollision = () => {
-    //colisiones entre asteroides y la nave
-    this.asteroidArr.forEach((eachAsteroid, index) => {
-      if (
-        eachAsteroid.x < this.spaceShip.x + this.spaceShip.w &&
-        eachAsteroid.x + eachAsteroid.w > this.spaceShip.x &&
-        eachAsteroid.y < this.spaceShip.y + this.spaceShip.h &&
-        eachAsteroid.h + eachAsteroid.y > this.spaceShip.y
-      ) {
-        this.asteroidArr.splice(index, 1);
-        this.checkLives();
-      }
-    });
-  };
-
-  checkCanvasCollision = () => {
-    if (
-      this.spaceShip.y + this.spaceShip.h > canvas.height ||
-      this.spaceShip.y < 0
-    ) {
-      this.checkLives();
-    }
-  };
-
-  checkLaserCollision = () => {
-    //colisiones entre asteroides y el láser
-    this.laserArr.forEach((eachLaser, i) => {
-      this.asteroidArr.forEach((eachAsteroid, j) => {
-        if (
-          eachLaser.x + eachLaser.w > eachAsteroid.x &&
-          eachLaser.y > eachAsteroid.y &&
-          eachLaser.y < eachAsteroid.y + eachAsteroid.h
-        ) {
-          this.laserArr.splice(i, 1);
-          this.asteroidArr.splice(j, 1);
-          this.score++;
-          this.scoreDOM.innerHTML = this.score;
-        }
-      });
-    });
-  };
-
-  shoot = () => {
-    this.blaster.currentTime = 0;
-    let x = this.spaceShip.x;
-    let y = this.spaceShip.y + this.spaceShip.h / 2;
-    let laser = new Laser(x, y);
-    this.laserArr.push(laser);
-    this.blaster.play();
-  };
-
-  flyingExtraLives = () => {
-    if (this.extraLivesArr.length === 0 || this.frames % 800 === 0) {
-      let randomPosY = Math.random() * canvas.height;
-      let extraLife = new ExtraLife(randomPosY);
-      this.extraLivesArr.push(extraLife);
-    }
-  };
-
-  flyingAsteroids = () => {
-    //loop con condiciones randomizadas para spawnear asteroides
-    if (this.asteroidArr.length === 0 || this.frames % 60 === 0) {
-      let speed = Math.random() * 5 + 2;
-      if (this.score >= 30) {
-        speed += 2;
-      } else if (this.score >= 60) {
-        speed += 4;
-      }
-      let randomPosY = Math.random() * 500;
-      let asteroid = new Asteroid(
-        randomPosY,
-        speed, // speed
-        Math.round(Math.random()) === 0 // color
-      );
-      this.asteroidArr.push(asteroid);
-    }
-  };
-
-  removeAsteroids = () => {
-    this.asteroidArr.forEach((eachAsteroid, index) => {
-      if (eachAsteroid.x + eachAsteroid.w < 0) {
-        this.asteroidArr.splice(index, 1);
-      }
-    });
-  };
-
-  removeExtraLife = () => {
-    this.extraLivesArr.forEach((eachLife, index) => {
-      if (eachLife.x + eachLife.w < 0) {
-        this.extraLivesArr.splice(index, 1);
-      }
-    });
   };
 
   drawBg = () => {
