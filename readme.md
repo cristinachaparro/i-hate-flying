@@ -85,7 +85,7 @@ Obi-Wan Kenobi, who hates to fly, has been designated by the Jedi Council to go 
 - Gameover screen
 - Winner screen
 
-# Extra Links (The links can be added later when available)
+# Extra Links
 
 ### Trello
 [Link](https://trello.com/b/itXGPIru/workflow)
