@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap");
 /* font-family: 'Orbitron', sans-serif; */
 
 body {
@@ -29,7 +29,7 @@ body {
 }
 
 .controls {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   color: white;
   display: flex;
   align-items: center;
@@ -39,13 +39,13 @@ body {
 }
 
 #play-btn {
-  font-family: 'Orbitron', sans-serif;
-  background: #FFE81F;
-	color: black;
-	border: none;
-	outline: solid 1px black;
+  font-family: "Orbitron", sans-serif;
+  background: #ffe81f;
+  color: black;
+  border: none;
+  outline: solid 1px black;
   border-radius: 4px;
-	cursor: pointer;
+  cursor: pointer;
   font-size: 2em;
   font-weight: bold;
   position: absolute;
@@ -61,6 +61,22 @@ body {
   justify-content: center;
 }
 
+#skip-video-btn {
+  font-family: "Orbitron", sans-serif;
+  background: #ffe81f;
+  color: black;
+  border: none;
+  outline: solid 1px black;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 2em;
+  font-weight: bold;
+  position: absolute;
+  right: 100px;
+  bottom: 100px;
+  z-index: 1;
+}
+
 #my-canvas {
   display: none;
 }
@@ -74,7 +90,7 @@ body {
 }
 
 #game-stats h1 {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   color: white;
   margin: 0 auto;
 }
@@ -100,13 +116,13 @@ body {
 }
 
 #restart-btn {
-  font-family: 'Orbitron', sans-serif;
-  background: #FFE81F;
-	color: black;
-	border: none;
-	outline: solid 1px black;
+  font-family: "Orbitron", sans-serif;
+  background: #ffe81f;
+  color: black;
+  border: none;
+  outline: solid 1px black;
   border-radius: 4px;
-	cursor: pointer;
+  cursor: pointer;
   font-size: 2em;
   font-weight: bold;
   position: absolute;
@@ -129,13 +145,13 @@ body {
 }
 
 #playagain-btn {
-  font-family: 'Orbitron', sans-serif;
-  background: #FFE81F;
-	color: black;
-	border: none;
-	outline: solid 1px black;
+  font-family: "Orbitron", sans-serif;
+  background: #ffe81f;
+  color: black;
+  border: none;
+  outline: solid 1px black;
   border-radius: 4px;
-	cursor: pointer;
+  cursor: pointer;
   font-size: 2em;
   font-weight: bold;
   position: absolute;

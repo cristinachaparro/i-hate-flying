@@ -10,6 +10,7 @@ const storyScreenDOM = document.querySelector("#story-screen");
 const playBtnDOM = document.querySelector("#play-btn");
 const tryAgainBtnDOM = document.querySelector("#restart-btn");
 const playAgainBtnDOM = document.querySelector("#playagain-btn");
+const skipVideoBtnDOM = document.querySelector("#skip-video-btn");
 
 const scoreDOM = document.querySelector("#game-stats");
 let game;
@@ -48,10 +49,20 @@ const startWithIntro = () => {
   storyScreenDOM.appendChild(video);
 
   // 3. Cuando acaba el vídeo
-  setTimeout(() => {
+
+  const timeout = setTimeout(() => {
     storyScreenDOM.style.display = "none";
     startGame();
   }, 58666);
+
+  const skipVideo = () => {
+    clearTimeout(timeout);
+    video.pause();
+    storyScreenDOM.style.display = "none";
+    startGame();
+  };
+
+  skipVideoBtnDOM.addEventListener("click", skipVideo);
 };
 
 //ADD EVENT LISTENERS
